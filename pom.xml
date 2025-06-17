@@ -65,17 +65,16 @@
                 <version>3.10.1</version>
                 <configuration>
                     <release>17</release>
+                    <compilerToolchain>jdk</compilerToolchain>
                 </configuration>
             </plugin>
 
-            <!-- Optional: Include toolchains plugin (no execution block) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-toolchains-plugin</artifactId>
                 <version>3.0.0</version>
             </plugin>
 
-            <!-- Spring Boot packaging plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
