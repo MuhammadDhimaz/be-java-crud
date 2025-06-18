@@ -74,7 +74,6 @@ public class UserController {
             @Valid @RequestBody User user) {
         User createdUser = userService.createUser(user);
         
-        // ✅ Call another service after user creation
         notificationService.sendWelcomeEmail(createdUser.getEmail(), createdUser.getName());
         
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);

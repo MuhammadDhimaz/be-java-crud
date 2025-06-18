@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 public class NotificationService {
 
     public void sendWelcomeEmail(String email, String name) {
-        // Simulate sending email
         System.out.println("Sending welcome email to: " + email + " (name: " + name + ")");
     }
 }
