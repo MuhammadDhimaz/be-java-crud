@@ -1,6 +1,7 @@
 package com.example.springbootcrud.controller;
 
 import com.example.springbootcrud.entity.User;
+import com.example.springbootcrud.service.NotificationService;
 import com.example.springbootcrud.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequestMapping("/api/users")
 @CrossOrigin(origins = "*")
 public class UserController {
+    
+
+    @Autowired
+    private NotificationService notificationService;
     
     @Autowired
     private UserService userService;
@@ -68,9 +73,12 @@ public class UserController {
             @Parameter(description = "User object to be created", required = true)
             @Valid @RequestBody User user) {
         User createdUser = userService.createUser(user);
+        
+        // ✅ Call another service after user creation
+        notificationService.sendWelcomeEmail(createdUser.getEmail(), createdUser.getName());
+        
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
-    
     @Operation(summary = "Update an existing user", description = "Update an existing user's information")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "User updated successfully",
